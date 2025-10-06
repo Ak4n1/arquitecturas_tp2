@@ -19,10 +19,14 @@ public class Enunciados {
                 1016,
                 false);
 
-
         EstudianteService es = EstudianteServiceImpl.getInstance();
 
-        es.altaEstudiante(requestEstudiante);
+        try {
+            es.altaEstudiante(requestEstudiante);
+            System.out.println("✅ Estudiante creado exitosamente");
+        } catch (IllegalArgumentException e) {
+            System.out.println("❌ Error: " + e.getMessage());
+        }
     }
 
     public static void enunciado2() {

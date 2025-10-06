@@ -44,8 +44,12 @@ public class EstudianteServiceImpl implements EstudianteService {
             request.getNumeroLibretaUniversitaria(),
             request.isGraduado()
         );
-        estudianteDAO.insertar(estudiante);
-        return toDTO(estudiante);
+        try {
+            estudianteDAO.insertar(estudiante);
+            return toDTO(estudiante);
+        } catch (IllegalArgumentException e) {
+            throw e; // Re-lanzar la excepción para que la maneje el llamador
+        }
     }
     
     @Override
