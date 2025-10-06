@@ -19,16 +19,20 @@ public class Enunciados {
                 1016,
                 false);
 
-
         EstudianteService es = EstudianteServiceImpl.getInstance();
 
-        es.altaEstudiante(requestEstudiante);
+        try {
+            es.altaEstudiante(requestEstudiante);
+            System.out.println("✅ Estudiante creado exitosamente");
+        } catch (IllegalArgumentException e) {
+            System.out.println("❌ Error: " + e.getMessage());
+        }
     }
 
     public static void enunciado2() {
         System.out.println("Punto 2: Matricular un estudiante en una carrera");
 
-        InscripcionRequestDTO requestInscripcion = new InscripcionRequestDTO(56L, 52L, new Date());
+        InscripcionRequestDTO requestInscripcion = new InscripcionRequestDTO(16L, 2L, new Date());
 
         InscripcionService is = InscripcionServiceImpl.getInstance();
         is.matricularEstudiante(requestInscripcion);

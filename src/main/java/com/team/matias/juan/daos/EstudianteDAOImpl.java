@@ -14,6 +14,15 @@ public class EstudianteDAOImpl implements EstudianteDAO {
 
     @Override
     public void insertar(Estudiante estudiante) {
+        // Verificar si ya existe un estudiante con el mismo DNI
+        List<Estudiante> estudiantesExistentes = em.createQuery("SELECT e FROM Estudiante e WHERE e.dni = :dni", Estudiante.class)
+                .setParameter("dni", estudiante.getDni())
+                .getResultList();
+        
+        if (!estudiantesExistentes.isEmpty()) {
+            throw new IllegalArgumentException("Ya existe un estudiante con el DNI: " + estudiante.getDni());
+        }
+        
         em.getTransaction().begin();
         em.persist(estudiante);
         em.getTransaction().commit();
