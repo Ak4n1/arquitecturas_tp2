@@ -22,7 +22,7 @@ public class InscripcionServiceImpl implements InscripcionService {
 
     private InscripcionServiceImpl() {
         DAOFactory factory = DAOFactory.getInstance();
-        this.em = factory.getEntityManagerMariaDB();
+        this.em = factory.getEntityManagerDerby();
         this.inscripcionDAO = new EstudianteCarreraDAOImpl(this.em);
     }
 
@@ -69,8 +69,8 @@ public class InscripcionServiceImpl implements InscripcionService {
         for (Object[] row : resultado) {
             String nombreCarrera = (String) row[0];
             Integer anio = (Integer) row[1];
-            Long inscriptos = (Long) row[2];
-            Long egresados = (Long) row[3];
+            Long inscriptos = ((Number) row[2]).longValue();
+            Long egresados = ((Number) row[3]).longValue();
 
             // Si el año es null, significa que la carrera no tiene inscripciones
             if (anio == null) {

@@ -28,7 +28,7 @@ public class Enunciados {
     public static void enunciado2() {
         System.out.println("Punto 2: Matricular un estudiante en una carrera");
 
-        InscripcionRequestDTO requestInscripcion = new InscripcionRequestDTO(56L, 52L, new Date());
+        InscripcionRequestDTO requestInscripcion = new InscripcionRequestDTO(4L, 5L, new Date());
 
         InscripcionService is = InscripcionServiceImpl.getInstance();
         is.matricularEstudiante(requestInscripcion);

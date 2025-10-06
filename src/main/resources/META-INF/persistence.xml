@@ -39,8 +39,8 @@
             <property name="javax.persistence.jdbc.url" value="jdbc:derby:C:/Users/JeeP_/OneDrive/Escritorio/TP_2_ARQUITECTURA/tp2_arquitectura/derbyDB;create=true"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.format_sql" value="false"/>
         </properties>
     </persistence-unit>
 </persistence>

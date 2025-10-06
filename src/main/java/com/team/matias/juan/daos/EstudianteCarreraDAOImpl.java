@@ -29,14 +29,14 @@ public class EstudianteCarreraDAOImpl implements EstudianteCarreraDAO {
     @Override
     @SuppressWarnings("unchecked")
     public List<Object[]> generarReporteCarreras() {
-        String jpql = "SELECT c.nombre, YEAR(ec.fechaDeInscripcion), COUNT(ec), " +
-                      "SUM(CASE WHEN e.graduado = true THEN 1 ELSE 0 END) " +
-                      "FROM Carrera c " +
-                      "LEFT JOIN Estudiante_carrera ec ON ec.id.carreraId = c.id " +
-                      "LEFT JOIN Estudiante e ON e.id = ec.id.estudianteId " +
-                      "GROUP BY c.nombre, YEAR(ec.fechaDeInscripcion) " +
-                      "ORDER BY c.nombre ASC, YEAR(ec.fechaDeInscripcion) ASC";
+        String sql = "SELECT c.nombre, YEAR(ec.fechaDeInscripcion) as anio, COUNT(ec.estudiante_id) as inscriptos, " +
+                     "0 as egresados " +
+                     "FROM carreras c " +
+                     "LEFT JOIN estudiante_carrera ec ON ec.carrera_id = c.id " +
+                     "LEFT JOIN estudiantes e ON e.id = ec.estudiante_id " +
+                     "GROUP BY c.nombre, YEAR(ec.fechaDeInscripcion) " +
+                     "ORDER BY c.nombre ASC, YEAR(ec.fechaDeInscripcion) ASC";
         
-        return em.createQuery(jpql).getResultList();
+        return em.createNativeQuery(sql).getResultList();
     }
 }
