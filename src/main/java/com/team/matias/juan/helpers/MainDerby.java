@@ -25,8 +25,7 @@ public class MainDerby {
             em = emf.createEntityManager();
             
             System.out.println("✅ Conexión exitosa a Derby");
-            System.out.println("✅ Base de datos Derby creada en:");
-            System.out.println("   C:/Users/JeeP_/OneDrive/Escritorio/TP_2_ARQUITECTURA/tp2_arquitectura/derbyDB");
+            System.out.println("✅ Base de datos Derby creada");
             System.out.println("\n✅ Tablas creadas/actualizadas en Derby:");
             System.out.println("   - ESTUDIANTES");
             System.out.println("   - CARRERAS");
