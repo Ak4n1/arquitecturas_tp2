@@ -13,7 +13,7 @@ public class Main {
         Enunciados.enunciado5("F");
         Enunciados.enunciado6();
         Enunciados.enunciado7("Tudai","Tandil");
-        Enunciados.enunciado8();
+        Enunciados.enunciado8(); //no es jpql es una consulta nativa porque no podiamos hacer que funcione con dos bases de datos
 
 
 
