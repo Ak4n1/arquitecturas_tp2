@@ -1,5 +1,7 @@
 package com.team.matias.juan.daos;
 
+import com.team.matias.juan.dto.estudiante.EstudianteResponseDTO;
+import com.team.matias.juan.dto.inscripcion.EstudiantePorCarreraDTO;
 import com.team.matias.juan.entities.Estudiante;
 
 import java.util.List;
@@ -8,12 +10,12 @@ public interface EstudianteDAO {
 
     void insertar(Estudiante estudiante);
 
-    List<Estudiante> buscarPorGenero(String genero);
+    List<EstudianteResponseDTO> buscarPorGenero(String genero);
 
-    Estudiante buscarPorLibreta(int numeroLibreta);
+    EstudianteResponseDTO buscarPorLibreta(int numeroLibreta);
 
-    List<Estudiante> buscarTodosOrdenadoPorApellido();
+    List<EstudianteResponseDTO> buscarTodosOrdenadoPorApellido();
 
-    List<Object[]> buscarEstudiantesPorCarreraYCiudad(String nombreCarrera, String ciudad);
+    List<EstudiantePorCarreraDTO> buscarEstudiantesPorCarreraYCiudad(String nombreCarrera, String ciudad);
 
 }

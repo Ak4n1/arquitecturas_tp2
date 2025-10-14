@@ -1,5 +1,7 @@
 package com.team.matias.juan.daos;
 
+import com.team.matias.juan.dto.estudiante.EstudianteResponseDTO;
+import com.team.matias.juan.dto.inscripcion.EstudiantePorCarreraDTO;
 import com.team.matias.juan.entities.Estudiante;
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -29,35 +31,46 @@ public class EstudianteDAOImpl implements EstudianteDAO {
     }
 
     @Override
-    public List<Estudiante> buscarPorGenero(String genero) {
-        return em.createQuery("SELECT e FROM Estudiante e WHERE e.genero = :genero", Estudiante.class)
+    public List<EstudianteResponseDTO> buscarPorGenero(String genero) {
+        String jpql = "SELECT NEW com.team.matias.juan.dto.estudiante.EstudianteResponseDTO(" +
+                      "e.id, e.genero, e.edad, e.apellido, e.nombre, e.dni, " +
+                      "e.ciudadDeRecidencia, e.numeroLibretaUniversitaria, e.graduado) " +
+                      "FROM Estudiante e WHERE e.genero = :genero";
+        return em.createQuery(jpql, EstudianteResponseDTO.class)
                 .setParameter("genero", genero)
                 .getResultList();
     }
 
     @Override
-    public Estudiante buscarPorLibreta(int numeroLibreta) {
-        List<Estudiante> estudiantes = em.createQuery("SELECT e FROM Estudiante e WHERE e.numeroLibretaUniversitaria = :numeroLibreta", Estudiante.class)
+    public EstudianteResponseDTO buscarPorLibreta(int numeroLibreta) {
+        String jpql = "SELECT NEW com.team.matias.juan.dto.estudiante.EstudianteResponseDTO(" +
+                      "e.id, e.genero, e.edad, e.apellido, e.nombre, e.dni, " +
+                      "e.ciudadDeRecidencia, e.numeroLibretaUniversitaria, e.graduado) " +
+                      "FROM Estudiante e WHERE e.numeroLibretaUniversitaria = :numeroLibreta";
+        List<EstudianteResponseDTO> estudiantes = em.createQuery(jpql, EstudianteResponseDTO.class)
                 .setParameter("numeroLibreta", numeroLibreta)
                 .getResultList();
         return estudiantes.isEmpty() ? null : estudiantes.get(0);
     }
 
     @Override
-    public List<Estudiante> buscarTodosOrdenadoPorApellido() {
-        return em.createQuery("SELECT e FROM Estudiante e ORDER BY e.apellido ASC", Estudiante.class).getResultList();
+    public List<EstudianteResponseDTO> buscarTodosOrdenadoPorApellido() {
+        String jpql = "SELECT NEW com.team.matias.juan.dto.estudiante.EstudianteResponseDTO(" +
+                      "e.id, e.genero, e.edad, e.apellido, e.nombre, e.dni, " +
+                      "e.ciudadDeRecidencia, e.numeroLibretaUniversitaria, e.graduado) " +
+                      "FROM Estudiante e ORDER BY e.apellido ASC";
+        return em.createQuery(jpql, EstudianteResponseDTO.class).getResultList();
     }
 
-
     @Override
-    @SuppressWarnings("unchecked")
-    public List<Object[]> buscarEstudiantesPorCarreraYCiudad(String nombreCarrera, String ciudad) {
-        String jpql = "SELECT e.id, e.nombre, e.apellido, e.numeroLibretaUniversitaria, e.ciudadDeRecidencia, c.nombre " +
-                "FROM Estudiante e " +
-                "JOIN Estudiante_carrera ec ON ec.id.estudianteId = e.id " +
-                "JOIN Carrera c ON c.id = ec.id.carreraId " +
-                "WHERE c.nombre = :nombreCarrera AND e.ciudadDeRecidencia = :ciudad";
-        return em.createQuery(jpql)
+    public List<EstudiantePorCarreraDTO> buscarEstudiantesPorCarreraYCiudad(String nombreCarrera, String ciudad) {
+        String jpql = "SELECT NEW com.team.matias.juan.dto.inscripcion.EstudiantePorCarreraDTO(" +
+                      "e.id, e.nombre, e.apellido, e.numeroLibretaUniversitaria, e.ciudadDeRecidencia, c.nombre) " +
+                      "FROM Estudiante e " +
+                      "JOIN Estudiante_carrera ec ON ec.id.estudianteId = e.id " +
+                      "JOIN Carrera c ON c.id = ec.id.carreraId " +
+                      "WHERE c.nombre = :nombreCarrera AND e.ciudadDeRecidencia = :ciudad";
+        return em.createQuery(jpql, EstudiantePorCarreraDTO.class)
                 .setParameter("nombreCarrera", nombreCarrera)
                 .setParameter("ciudad", ciudad)
                 .getResultList();

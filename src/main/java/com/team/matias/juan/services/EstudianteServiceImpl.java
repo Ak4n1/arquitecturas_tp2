@@ -7,7 +7,6 @@ import com.team.matias.juan.dto.estudiante.EstudianteResponseDTO;
 import com.team.matias.juan.dto.inscripcion.EstudiantePorCarreraDTO;
 import com.team.matias.juan.entities.Estudiante;
 import com.team.matias.juan.factory.DAOFactory;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 
@@ -54,48 +53,22 @@ public class EstudianteServiceImpl implements EstudianteService {
     
     @Override
     public EstudianteResponseDTO buscarPorLibreta(int numeroLibreta) {
-        Estudiante estudiante = estudianteDAO.buscarPorLibreta(numeroLibreta);
-        return estudiante != null ? toDTO(estudiante) : null;
+        return estudianteDAO.buscarPorLibreta(numeroLibreta);
     }
     
     @Override
     public List<EstudianteResponseDTO> obtenerTodosOrdenados() {
-        List<Estudiante> estudiantes = estudianteDAO.buscarTodosOrdenadoPorApellido();
-        List<EstudianteResponseDTO> resultado = new ArrayList<>();
-        for (Estudiante e : estudiantes) {
-            resultado.add(toDTO(e));
-        }
-        return resultado;
+        return estudianteDAO.buscarTodosOrdenadoPorApellido();
     }
     
     @Override
     public List<EstudianteResponseDTO> obtenerPorGenero(String genero) {
-        List<Estudiante> estudiantes = estudianteDAO.buscarPorGenero(genero);
-        List<EstudianteResponseDTO> resultado = new ArrayList<>();
-        for (Estudiante e : estudiantes) {
-            resultado.add(toDTO(e));
-        }
-        return resultado;
+        return estudianteDAO.buscarPorGenero(genero);
     }
 
     @Override
     public List<EstudiantePorCarreraDTO> obtenerEstudiantesPorCarreraYCiudad(String nombreCarrera, String ciudad) {
-        List<Object[]> resultado = estudianteDAO.buscarEstudiantesPorCarreraYCiudad(nombreCarrera, ciudad);
-        List<EstudiantePorCarreraDTO> estudiantes = new ArrayList<>();
-
-        for (Object[] row : resultado) {
-            EstudiantePorCarreraDTO dto = new EstudiantePorCarreraDTO(
-                    (Long) row[0],
-                    (String) row[1],
-                    (String) row[2],
-                    (Integer) row[3],
-                    (String) row[4],
-                    (String) row[5]
-            );
-            estudiantes.add(dto);
-        }
-
-        return estudiantes;
+        return estudianteDAO.buscarEstudiantesPorCarreraYCiudad(nombreCarrera, ciudad);
     }
     
     private EstudianteResponseDTO toDTO(Estudiante e) {
