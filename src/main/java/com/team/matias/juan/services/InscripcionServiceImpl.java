@@ -8,10 +8,7 @@ import com.team.matias.juan.dto.inscripcion.InscripcionResponseDTO;
 import com.team.matias.juan.entities.Estudiante_carrera;
 import com.team.matias.juan.factory.DAOFactory;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.persistence.EntityManager;
 
 public class InscripcionServiceImpl implements InscripcionService {
@@ -22,7 +19,7 @@ public class InscripcionServiceImpl implements InscripcionService {
 
     private InscripcionServiceImpl() {
         DAOFactory factory = DAOFactory.getInstance();
-        this.em = factory.getEntityManagerDerby();
+        this.em = factory.getEntityManagerMariaDB();
         this.inscripcionDAO = new EstudianteCarreraDAOImpl(this.em);
     }
 
@@ -63,35 +60,6 @@ public class InscripcionServiceImpl implements InscripcionService {
 
     @Override
     public List<CarreraReporteDTO> generarReporteCarreras() {
-        List<Object[]> resultado = inscripcionDAO.generarReporteCarreras();
-        Map<String, CarreraReporteDTO> reporteMap = new HashMap<>();
-
-        for (Object[] row : resultado) {
-            String nombreCarrera = (String) row[0];
-            Integer anio = (Integer) row[1];
-            Long inscriptos = ((Number) row[2]).longValue();
-            Long egresados = ((Number) row[3]).longValue();
-
-            // Si el año es null, significa que la carrera no tiene inscripciones
-            if (anio == null) {
-                CarreraReporteDTO carreraDTO = reporteMap.get(nombreCarrera);
-                if (carreraDTO == null) {
-                    carreraDTO = new CarreraReporteDTO(nombreCarrera);
-                    reporteMap.put(nombreCarrera, carreraDTO);
-                }
-                // No agregamos ningún año para carreras sin inscripciones
-                continue;
-            }
-
-            CarreraReporteDTO carreraDTO = reporteMap.get(nombreCarrera);
-            if (carreraDTO == null) {
-                carreraDTO = new CarreraReporteDTO(nombreCarrera);
-                reporteMap.put(nombreCarrera, carreraDTO);
-            }
-
-            carreraDTO.agregarAnio(new CarreraReporteDTO.AnioReporteDTO(anio, inscriptos, egresados));
-        }
-
-        return new ArrayList<>(reporteMap.values());
+        return inscripcionDAO.generarReporteCarreras();
     }
 }
