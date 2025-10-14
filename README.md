@@ -1,10 +1,10 @@
 # TP2 - Arquitectura Web
 
-## 📋 INSTRUCCIONES DE EJECUCIÓN
+## INSTRUCCIONES DE EJECUCIÓN
 
-### ⚠️ IMPORTANTE: Sigue estos pasos EN ORDEN
+### IMPORTANTE: Sigue estos pasos EN ORDEN
 
-## 🔧 PASO 1: Configurar Base de Datos
+## PASO 1: Configurar Base de Datos
 
 **ANTES de ejecutar el programa principal, DEBES crear las tablas en la base de datos.**
 
@@ -12,23 +12,23 @@
 ```bash
 java com.team.matias.juan.helpers.MainDerby
 ```
-✅ **Qué hace**: Crea automáticamente la base de datos Derby y todas las tablas
+**Qué hace**: Crea automáticamente la base de datos Derby y todas las tablas
 
 ### Opción B: MariaDB (Requiere servidor MariaDB ejecutándose)
 ```bash
 java com.team.matias.juan.helpers.MainMariaDb
 ```
-✅ **Qué hace**: Crea las tablas en MariaDB (debe estar ejecutándose)
+**Qué hace**: Crea las tablas en MariaDB (debe estar ejecutándose)
 
-## 🚀 PASO 2: Ejecutar el Programa Principal
+## PASO 2: Ejecutar el Programa Principal
 
 **SOLO después de completar el Paso 1:**
 ```bash
 java com.team.matias.juan.Main
 ```
-✅ **Qué hace**: Ejecuta todos los enunciados del TP2
+**Qué hace**: Ejecuta todos los enunciados del TP2
 
-## ⚙️ CONFIGURACIÓN DE CONEXIÓN
+## CONFIGURACIÓN DE CONEXIÓN
 
 Si necesitas cambiar la configuración de conexión, edita:
 ```
@@ -45,7 +45,7 @@ src/main/resources/META-INF/persistence.xml
 - **Base de datos**: derbyDB (archivo local)
 - **Ubicación**: C:/Users/JeeP_/OneDrive/Escritorio/TP_2_ARQUITECTURA/tp2_arquitectura/derbyDB
 
-## 📊 DIAGRAMAS DEL SISTEMA
+## DIAGRAMAS DEL SISTEMA
 
 **Para entender la arquitectura del proyecto, revisa:**
 ```
@@ -55,7 +55,7 @@ src/main/resources/Diagramas/
 - **DClases_TP2.jpg**: Diagrama de clases del sistema
 - **DER_TP2.jpg**: Diagrama Entidad-Relación de la base de datos
 
-## 🔍 RESUMEN RÁPIDO
+## RESUMEN RÁPIDO
 
 1. **Ejecuta**: `MainDerby` o `MainMariaDb` (crear tablas)
 2. **Ejecuta**: `Main` (ejecutar enunciados)  
